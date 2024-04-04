@@ -16,7 +16,7 @@ public class ContadorArbol {
 		return list;
 	}
 	
-		private void numerosParesInOrden(BinaryTree<Integer> arbol, List<Integer> list) {
+	private void numerosParesInOrden(BinaryTree<Integer> arbol, List<Integer> list) {
 		if (arbol.hasLeftChild())
 			numerosParesInOrden(arbol.getLeftChild(), list);
 		
