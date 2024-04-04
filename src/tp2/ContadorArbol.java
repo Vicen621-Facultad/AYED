@@ -12,10 +12,11 @@ public class ContadorArbol {
 	
 	public List<Integer> numerosParesInOrden() {
 		List<Integer> list = new ArrayList<>();
-		return numerosParesInOrden(arbol, list);
+		numerosParesInOrden(arbol, list);
+		return list;
 	}
 	
-	private List<Integer> numerosParesInOrden(BinaryTree<Integer> arbol, List<Integer> list) {
+		private void numerosParesInOrden(BinaryTree<Integer> arbol, List<Integer> list) {
 		if (arbol.hasLeftChild())
 			numerosParesInOrden(arbol.getLeftChild(), list);
 		
@@ -24,16 +25,15 @@ public class ContadorArbol {
 		
 		if (arbol.hasRightChild())
 			numerosParesInOrden(arbol.getRightChild(), list);
-		
-		return list;
 	}
 	
 	public List<Integer> numerosParesPostOrden() {
 		List<Integer> list = new ArrayList<>();
-		return numerosParesPostOrden(arbol, list);
+		numerosParesPostOrden(arbol, list);
+		return list;
 	}
 
-	private List<Integer> numerosParesPostOrden(BinaryTree<Integer> arbol, List<Integer> list) {
+	private void numerosParesPostOrden(BinaryTree<Integer> arbol, List<Integer> list) {
 		if (arbol.hasLeftChild())
 			numerosParesPostOrden(arbol.getLeftChild(), list);
 		
@@ -42,7 +42,5 @@ public class ContadorArbol {
 
 		if (arbol.getData() % 2 == 0)
 			list.add(arbol.getData());
-		
-		return list;
 	}
 }
