@@ -1,28 +1,36 @@
 package tp2;
 
 public class Tests {
-	public static void main(String[] args) {
-		 //           14
-        //         /    \
-        //        53     2
-        //       / \    / \
-        //      12  9  33 102
-        BinaryTree<Integer> root =new BinaryTree<>(14);
-        BinaryTree<Integer> cincuentaYTres =new BinaryTree<>(53);
-        BinaryTree<Integer> dos =new BinaryTree<>(2);
-        BinaryTree<Integer> doce =new BinaryTree<>(12);
-        BinaryTree<Integer> nueve = new BinaryTree<>(9);
-        BinaryTree<Integer> treintaYTres =new BinaryTree<>(33);
-        BinaryTree<Integer> cientoDos =new BinaryTree<>(102);
-
-        root.addLeftChild(cincuentaYTres);
-        root.addRightChild(dos);
-        cincuentaYTres.addLeftChild(doce);
-        cincuentaYTres.addRightChild(nueve);
-        dos.addLeftChild(treintaYTres);
-        dos.addRightChild(cientoDos);
-
-		ProfundidadDeArbolBinario pab = new ProfundidadDeArbolBinario(root);
-		System.out.println(pab.sumaElementosProfundidad(3));
+	public static void main(String[] args) { 
+		BinaryTree<Integer> root = new BinaryTree<>(2);
+		BinaryTree<Integer> siete = new BinaryTree<>(7);
+		BinaryTree<Integer> mCinco = new BinaryTree<>(-5);
+		BinaryTree<Integer> veintiTres = new BinaryTree<>(23);
+		BinaryTree<Integer> seis = new BinaryTree<>(6);
+		BinaryTree<Integer> dieciNueve = new BinaryTree<>(19);
+		BinaryTree<Integer> mTres = new BinaryTree<>(-3);
+		BinaryTree<Integer> cincuentaYCinco = new BinaryTree<>(55);
+		BinaryTree<Integer> once = new BinaryTree<>(11);
+		BinaryTree<Integer> cuatro = new BinaryTree<>(4);
+		BinaryTree<Integer> dieciOcho = new BinaryTree<>(18);
+		
+		root.addLeftChild(siete);
+		root.addRightChild(mCinco);
+		
+		siete.addLeftChild(veintiTres);
+		siete.addRightChild(seis);
+		
+		mCinco.addLeftChild(dieciNueve);
+		
+		veintiTres.addLeftChild(mTres);
+		
+		seis.addLeftChild(cincuentaYCinco);
+		seis.addRightChild(once);
+		
+		dieciNueve.addRightChild(cuatro);
+		
+		cuatro.addLeftChild(dieciOcho);
+		
+		System.out.println(new ParcialArboles(root).isLeftTree(7));
 	}
 }
