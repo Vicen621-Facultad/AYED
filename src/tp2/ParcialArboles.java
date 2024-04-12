@@ -117,13 +117,26 @@ public class ParcialArboles {
 	
 	public BinaryTree<SumDif> sumAndDif(BinaryTree<Integer> arbol) {
 		BinaryTree<SumDif> sumDif = new BinaryTree<>();
-		sumAndDif(arbol, new BinaryTree<>(), new SumDif(0, 0));
+		sumAndDif(arbol, sumDif, 0, 0);
 		return sumDif;
 	}
 	
 	//TODO: Terminar
-	private void sumAndDif(BinaryTree<Integer> arbol, BinaryTree<SumDif> sumDif, SumDif data) {
+	private void sumAndDif(BinaryTree<Integer> arbol, BinaryTree<SumDif> sumDif, int sum, int dif) {
+		SumDif data = new SumDif(arbol.getData() + sum, arbol.getData() - dif);
+		sumDif.setData(data);
 		
+		if (arbol.hasLeftChild()) {
+			BinaryTree<SumDif> node = new BinaryTree<>();
+			sumAndDif(arbol.getLeftChild(), node, data.getSum(), arbol.getData());
+			sumDif.addLeftChild(node);
+		}
+		
+		if (arbol.hasRightChild()) {
+			BinaryTree<SumDif> node = new BinaryTree<>();
+			sumAndDif(arbol.getRightChild(), node, data.getSum(), arbol.getData());
+			sumDif.addRightChild(node);
+		}
 	}
 	
 	public static class SumDif {
