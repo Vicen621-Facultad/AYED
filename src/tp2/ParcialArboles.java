@@ -121,7 +121,6 @@ public class ParcialArboles {
 		return sumDif;
 	}
 	
-	//TODO: Terminar
 	private void sumAndDif(BinaryTree<Integer> arbol, BinaryTree<SumDif> sumDif, int sum, int dif) {
 		SumDif data = new SumDif(arbol.getData() + sum, arbol.getData() - dif);
 		sumDif.setData(data);
