@@ -1,6 +1,9 @@
 package tp3;
 
+import tp3.AnalizadorArbol.AreaEmpresa;
+
 public class Test {
+	
 	public static void main(String[] args) {
 		GeneralTree<Integer> root = new GeneralTree<>(1);
 		GeneralTree<Integer> dos = new GeneralTree<>(2);
@@ -39,6 +42,6 @@ public class Test {
 		once.addChild(catorce);
 		once.addChild(quince);
 
-		System.out.println(root.nivel(13));
+		System.out.println(root.esAncestro(4, 12));
 	}
 }
