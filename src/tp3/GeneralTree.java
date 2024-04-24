@@ -8,7 +8,7 @@ import tp1.ejercicio8.Queue;
 public class GeneralTree<T> {
 
 	private T data;
-	private List<GeneralTree<T>> children = new LinkedList<GeneralTree<T>>();
+	private List<GeneralTree<T>> children = new LinkedList<>();
 
 	public GeneralTree() {
 
@@ -42,6 +42,11 @@ public class GeneralTree<T> {
 
 	public void addChild(GeneralTree<T> child) {
 		this.getChildren().add(child);
+	}
+
+	public void addChilds(GeneralTree<T>... childs) {
+		for (GeneralTree<T> child : childs)
+			this.addChild(child);
 	}
 
 	public boolean isLeaf() {
