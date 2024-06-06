@@ -1,5 +1,7 @@
 package ayed.tp3;
 
+import ayed.tp1.ejercicio8.Queue;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ public class GeneralTree<T> {
 	private List<GeneralTree<T>> children = new LinkedList<>();
 
 	public GeneralTree() {
+
 	}
 
 	public GeneralTree(T data) {
@@ -41,6 +44,11 @@ public class GeneralTree<T> {
 		this.getChildren().add(child);
 	}
 
+	public void addChilds(GeneralTree<T>... childs) {
+		for (GeneralTree<T> child : childs)
+			this.addChild(child);
+	}
+
 	public boolean isLeaf() {
 		return !this.hasChildren();
 	}
@@ -65,6 +73,14 @@ public class GeneralTree<T> {
 	 * @return La altura del arbol
 	 */
 	public int altura() {
+		if (this.hasChildren()) {
+			int max = -1;
+			for (GeneralTree<T> children : this.getChildren())
+				max = Math.max(children.altura(), max);
+
+			return max + 1;
+		}
+
 		return 0;
 	}
 
@@ -99,6 +115,83 @@ public class GeneralTree<T> {
 	 * @return El ancho del arbol
 	 */
 	public int ancho() {
-		return 0;
+		int max = -1;
+		GeneralTree<T> aux;
+
+		Queue<GeneralTree<T>> queue = new Queue<>();
+		queue.enqueue(this);
+		while (!queue.isEmpty()) {
+			int size = queue.size();
+			int currentLevel = 0;
+
+			while (size != 0) {
+				currentLevel++;
+				aux = queue.dequeue();
+
+				for (GeneralTree<T> child : aux.getChildren())
+					queue.enqueue(child);
+
+				size--;
+			}
+
+			max = Math.max(max, currentLevel);
+		}
+		return max;
+	}
+
+	/**
+	 * Este metodo se fija si el valor a es ancestro de b. Se dice que un nodo n es
+	 * ancestro de m si existe un camino desde n hasta m.
+	 * 
+	 * @param a El ancestro
+	 * @param b El descendiente
+	 * @return True si a es ancestro de b, false en caso contrario
+	 */
+	public boolean esAncestro(T a, T b) {
+		if (this.getData().equals(a))
+			return this.isChild(b);
+
+
+		if (this.hasChildren()) {
+			for (GeneralTree<T> children : this.getChildren()) {
+				if (children.esAncestro(a, b))
+					return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	private boolean isChild(T data) {
+		Queue<GeneralTree<T>> queue = new Queue<>();
+		queue.enqueue(this);
+
+		GeneralTree<T> aux;
+		while (!queue.isEmpty()) {
+			aux = queue.dequeue();
+			if (aux.getData().equals(data))
+				return true;
+			
+			if (aux.hasChildren())
+				for (GeneralTree<T> children : aux.getChildren())
+					queue.enqueue(children);
+		}
+		
+		return false;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
