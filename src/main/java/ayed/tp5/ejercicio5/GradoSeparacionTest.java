@@ -1,12 +1,15 @@
 package ayed.tp5.ejercicio5;
-import static org.junit.jupiter.api.Assertions.*;
 
 import ayed.tp5.ejercicio1.Graph;
 import ayed.tp5.ejercicio1.Vertex;
 import ayed.tp5.ejercicio1.adjList.AdjListGraph;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GradoSeparacionTest {
 
@@ -61,7 +64,6 @@ public class GradoSeparacionTest {
         assertEquals(1, jubilados.size());
         assertTrue(jubilados.stream().anyMatch(p -> p.getNombre().equals("Jubilado1")));
     }
-
 
 
     @Test

@@ -1,14 +1,16 @@
 package ayed.tp5.ejercicio3;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import ayed.tp5.ejercicio1.Graph;
 import ayed.tp5.ejercicio1.Vertex;
 import ayed.tp5.ejercicio1.adjList.AdjListGraph;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.List;
+
 import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MapaTest {
 
@@ -49,7 +51,7 @@ public class MapaTest {
 
     @Test
     public void testDevolverCaminoExceptuando() {
-        List<String> camino = mapa.devolverCaminoExceptuando("A", "E", Arrays.asList("B"));
+        List<String> camino = mapa.devolverCaminoExceptuando("A", "E", List.of("B"));
         List<String> expected = Arrays.asList("A", "C", "E");
         assertEquals(expected, camino);
     }

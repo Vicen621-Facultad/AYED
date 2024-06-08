@@ -3,13 +3,11 @@ package ayed.tp5.ejercicio6;
 import ayed.tp5.ejercicio1.Graph;
 import ayed.tp5.ejercicio1.Vertex;
 import ayed.tp5.ejercicio1.adjList.AdjListGraph;
-import ayed.tp5.ejercicio1.adjList.AdjListVertex;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestBuscadorDeCaminos {
 

@@ -1,11 +1,11 @@
 package ayed.tp5.ejercicio1.adjMatrix;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ayed.tp5.ejercicio1.Edge;
 import ayed.tp5.ejercicio1.Graph;
 import ayed.tp5.ejercicio1.Vertex;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implementación del grafo con matriz de adyacencias.
@@ -13,11 +13,11 @@ import ayed.tp5.ejercicio1.Vertex;
  * @param <T> Tipo de valores de los vértices.
  */
 public class AdjMatrixGraph<T> implements Graph<T> {
-	private static final int EMPTY_VALUE = 0;
-	
-    private int maxVertices;
-    private List<AdjMatrixVertex<T>> vertices;
-    private int[][] adjMatrix;
+    private static final int EMPTY_VALUE = 0;
+
+    private final int maxVertices;
+    private final List<AdjMatrixVertex<T>> vertices;
+    private final int[][] adjMatrix;
 
     public AdjMatrixGraph(int maxVert) {
         maxVertices = maxVert;
@@ -26,40 +26,40 @@ public class AdjMatrixGraph<T> implements Graph<T> {
         // se inicializa la matriz con el valor vacío
         for (int i = 0; i < maxVertices; i++) {
             for (int j = 0; j < maxVertices; j++) {
-            	adjMatrix[i][j] = EMPTY_VALUE;
+                adjMatrix[i][j] = EMPTY_VALUE;
             }
         }
     }
 
     @Override
     public Vertex<T> createVertex(T data) {
-    	if (vertices.size() == maxVertices) {
-    		// se llego al máximo
-    		return null;
-    	}
-    	AdjMatrixVertex<T> vertice = new AdjMatrixVertex<>(data, vertices.size());
-    	vertices.add(vertice);
-    	return vertice;
+        if (vertices.size() == maxVertices) {
+            // se llego al máximo
+            return null;
+        }
+        AdjMatrixVertex<T> vertice = new AdjMatrixVertex<>(data, vertices.size());
+        vertices.add(vertice);
+        return vertice;
     }
 
     @Override
     public void removeVertex(Vertex<T> vertex) {
-    	
-    	if (!vertices.remove(vertex)) {
-    		// el vértice no está en el grafo
-    		return;
-    	}
+
+        if (!vertices.remove(vertex)) {
+            // el vértice no está en el grafo
+            return;
+        }
 
         int index = vertex.getPosition();
         int total = vertices.size();
         // Elimino la fila
         for (int fila = index; fila < total; fila++) {
-        	adjMatrix[fila] = adjMatrix[fila + 1];
+            adjMatrix[fila] = adjMatrix[fila + 1];
         }
         // Elimino la columna
         for (int fila = 0; fila < total; fila++) {
             for (int col = index; col < total; col++) {
-            	adjMatrix[fila][col] = adjMatrix[fila][col + 1];
+                adjMatrix[fila][col] = adjMatrix[fila][col + 1];
             }
         }
         // Reasigno las posiciones
@@ -68,51 +68,51 @@ public class AdjMatrixGraph<T> implements Graph<T> {
         }
         // Limpio la ultima fila
         for (int col = 0; col < total; col++) {
-        	adjMatrix[total][col] = EMPTY_VALUE;
+            adjMatrix[total][col] = EMPTY_VALUE;
         }
         // Limpio la ultima columna
         for (int fila = 0; fila < total; fila++) {
-        	adjMatrix[fila][total] = EMPTY_VALUE;
+            adjMatrix[fila][total] = EMPTY_VALUE;
         }
     }
-    
+
     @Override
-	public Vertex<T> search(T data) {
-		for (Vertex<T> vertice : this.vertices) {
-			if (vertice.getData().equals(data)) {
-				return vertice;
-			}
-		}
-		return null;
-	}
-    
-	/**
-	 * Indica si el vértice recibido pertenece al grafo.
-	 */
-	private boolean belongs(Vertex<T> vertex) {
-		int pos = vertex.getPosition();
-		return pos >= 0 && pos < this.vertices.size() 
-			&& this.vertices.get(pos) == vertex;
-	}
+    public Vertex<T> search(T data) {
+        for (Vertex<T> vertice : this.vertices) {
+            if (vertice.getData().equals(data)) {
+                return vertice;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Indica si el vértice recibido pertenece al grafo.
+     */
+    private boolean belongs(Vertex<T> vertex) {
+        int pos = vertex.getPosition();
+        return pos >= 0 && pos < this.vertices.size()
+                && this.vertices.get(pos) == vertex;
+    }
 
     @Override
     public void connect(Vertex<T> origin, Vertex<T> destination) {
-    	connect(origin, destination, 1);
+        connect(origin, destination, 1);
     }
 
     @Override
     public void connect(Vertex<T> origin, Vertex<T> destination, int weight) {
-    	if (this.belongs(origin) && this.belongs(destination)) {
-    		adjMatrix[((AdjMatrixVertex<T>) origin).getPosition()]
-    				[((AdjMatrixVertex<T>) destination).getPosition()] = weight;
-    	}
+        if (this.belongs(origin) && this.belongs(destination)) {
+            adjMatrix[origin.getPosition()]
+                    [destination.getPosition()] = weight;
+        }
     }
 
     @Override
     public void disconnect(Vertex<T> origin, Vertex<T> destination) {
-    	if (this.belongs(origin)) {
-    		this.connect(origin, destination, EMPTY_VALUE);
-    	}
+        if (this.belongs(origin)) {
+            this.connect(origin, destination, EMPTY_VALUE);
+        }
     }
 
     @Override
@@ -127,17 +127,17 @@ public class AdjMatrixGraph<T> implements Graph<T> {
 
     @Override
     public List<Vertex<T>> getVertices() {
-    	return new ArrayList<>(this.vertices);
+        return new ArrayList<>(this.vertices);
     }
 
     @Override
     public int weight(Vertex<T> origin, Vertex<T> destination) {
-    	int weight = 0;
-    	if (this.belongs(origin) && this.belongs(destination)) {
-    		weight = adjMatrix[((AdjMatrixVertex<T>) origin).getPosition()]
-    				[((AdjMatrixVertex<T>) destination).getPosition()];
-    	}
-   		return weight;
+        int weight = 0;
+        if (this.belongs(origin) && this.belongs(destination)) {
+            weight = adjMatrix[origin.getPosition()]
+                    [destination.getPosition()];
+        }
+        return weight;
     }
 
     @Override
@@ -154,14 +154,14 @@ public class AdjMatrixGraph<T> implements Graph<T> {
 
     @Override
     public Vertex<T> getVertex(int position) {
-    	if (position < 0 || position >= this.vertices.size()) {
-    		return null;
-    	}
+        if (position < 0 || position >= this.vertices.size()) {
+            return null;
+        }
         return vertices.get(position);
     }
-    
+
     @Override
     public int getSize() {
-    	return this.vertices.size();
+        return this.vertices.size();
     }
 }

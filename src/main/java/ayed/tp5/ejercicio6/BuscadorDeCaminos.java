@@ -43,7 +43,6 @@ public class BuscadorDeCaminos {
     }
 
 
-
     public void setBosque(Graph<String> bosque) {
         this.bosque = bosque;
     }

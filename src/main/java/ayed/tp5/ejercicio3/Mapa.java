@@ -19,6 +19,7 @@ public class Mapa {
     /**
      * Retorna la lista de ciudades que se deben atravesar para ir de ciudad1 a ciudad2 en caso de que se
      * pueda llegar, si no retorna la lista vacía. (Sin tener en cuenta el combustible).
+     *
      * @param ciudad1
      * @param ciudad2
      * @return
@@ -61,6 +62,7 @@ public class Mapa {
      * Retorna la lista de ciudades que forman un camino desde ciudad1 a ciudad2, sin pasar por las ciudades
      * que están contenidas en la lista ciudades pasada por parámetro, si no existe camino retorna la lista
      * vacía. (Sin tener en cuenta el combustible).
+     *
      * @param ciudad1
      * @param ciudad2
      * @param ciudades
@@ -103,6 +105,7 @@ public class Mapa {
     /**
      * Retorna la lista de ciudades que forman el camino más corto para llegar de ciudad1 a ciudad2, si no
      * existe camino retorna la lista vacía. (Las rutas poseen la distancia)
+     *
      * @param ciudad1
      * @param ciudad2
      * @return

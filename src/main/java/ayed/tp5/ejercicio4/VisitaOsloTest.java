@@ -3,7 +3,6 @@ package ayed.tp5.ejercicio4;
 import ayed.tp5.ejercicio1.Graph;
 import ayed.tp5.ejercicio1.Vertex;
 import ayed.tp5.ejercicio1.adjList.AdjListGraph;
-import ayed.tp5.ejercicio3.Mapa;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
