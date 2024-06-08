@@ -9,7 +9,7 @@ public interface Graph<T> {
 	 * 
 	 * @param data Dato que contendrá el nuevo vértice
 	 */
-	public Vertex<T> createVertex(T data);
+	Vertex<T> createVertex(T data);
 	
 	/**
 	 * Elimina el vértice del Grafo.
@@ -17,7 +17,7 @@ public interface Graph<T> {
 	 * 
 	 * @param vertex Vértice a eliminar
 	 */
-	public void removeVertex(Vertex<T> vertex);
+    void removeVertex(Vertex<T> vertex);
 	
 	/**
 	 * Busca y retorna el primer vértice cuyo dato es igual al parámetro recibido.
@@ -26,7 +26,7 @@ public interface Graph<T> {
 	 * @param data Contenido del vértice
 	 * @return Vertice o null si no existe tal
 	 */
-	public Vertex<T> search(T data);
+    Vertex<T> search(T data);
 	
 	/**
 	 * Conecta el vértice origen con el vértice destino.
@@ -35,7 +35,7 @@ public interface Graph<T> {
 	 * @param origin
 	 * @param destination
 	 */
-	public void connect(Vertex<T> origin, Vertex<T> destination);
+    void connect(Vertex<T> origin, Vertex<T> destination);
 	
 	/**
 	 * Conecta el vertice origen con el destino con peso.
@@ -45,7 +45,7 @@ public interface Graph<T> {
 	 * @param destination
 	 * @param weight
 	 */
-	public void connect(Vertex<T> origin, Vertex<T> destination, int weight);
+    void connect(Vertex<T> origin, Vertex<T> destination, int weight);
 	
 	/**
 	 * Desconecta el vértice origen con el destino.
@@ -55,7 +55,7 @@ public interface Graph<T> {
 	 * @param origin
 	 * @param destination
 	 */
-	public void disconnect(Vertex<T> origin, Vertex<T> destination);
+    void disconnect(Vertex<T> origin, Vertex<T> destination);
 	
 	/**
 	 * Retorna true si existe una arista entre el vértice origen y el destino.
@@ -64,7 +64,7 @@ public interface Graph<T> {
 	 * @param destination
 	 * @return
 	 */
-	public boolean existsEdge(Vertex<T> origin, Vertex<T> destination);
+    boolean existsEdge(Vertex<T> origin, Vertex<T> destination);
 	
 	/**
 	 * Retorna el peso entre dos vértices.
@@ -74,21 +74,21 @@ public interface Graph<T> {
 	 * @param destination
 	 * @return
 	 */
-	public int weight(Vertex<T> origin, Vertex<T> destination);
+    int weight(Vertex<T> origin, Vertex<T> destination);
 
 	/**
 	 * Retorna si el grafo no contiene datos (sin vértices creados).
 	 * 
 	 * @return
 	 */
-	public boolean isEmpty();
+    boolean isEmpty();
 	
 	/**
 	 * Retorna la lista de vértices.
 	 * 
 	 * @return
 	 */
-	public List<Vertex<T>> getVertices();
+    List<Vertex<T>> getVertices();
 		
 	/**
 	 * Retorna la lista de adyacentes al vértice recibido.
@@ -96,7 +96,7 @@ public interface Graph<T> {
 	 * @param v
 	 * @return
 	 */
-	public List<Edge<T>> getEdges(Vertex<T> v);
+    List<Edge<T>> getEdges(Vertex<T> v);
 	
 	/**
 	 * Obtiene el vértice para la posición recibida.
@@ -104,13 +104,13 @@ public interface Graph<T> {
 	 * @param position
 	 * @return
 	 */
-	public Vertex<T> getVertex(int position);
+    Vertex<T> getVertex(int position);
 	
 	/**
 	 * Retorna la cantidad de vértices del grafo
 	 * 
 	 * @return
 	 */
-	public int getSize();
+    int getSize();
 
 }

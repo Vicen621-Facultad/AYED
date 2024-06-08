@@ -3,7 +3,6 @@ package ayed.tp5.ejercicio3;
 import ayed.tp5.ejercicio1.Edge;
 import ayed.tp5.ejercicio1.Graph;
 import ayed.tp5.ejercicio1.Vertex;
-import ayed.tp5.ejercicio3.CaminoMinimo;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -40,7 +39,7 @@ public class Mapa {
         visitados[origen.getPosition()] = true;
         camino.add(origen.getData());
         if (origen == destino)
-            return false;
+            return true;
 
         List<Edge<String>> adyacentes = mapaCiudades.getEdges(origen);
         Iterator<Edge<String>> iter = adyacentes.iterator();
@@ -52,11 +51,10 @@ public class Mapa {
                 paro = dfs(vertex, destino, visitados, camino);
         }
 
-        if (paro)
-            return false;
+        if (!paro)
+            camino.remove(camino.size() - 1);
 
-        camino.remove(camino.size() - 1);
-        return true;
+        return paro;
     }
 
     /**
@@ -96,11 +94,10 @@ public class Mapa {
                 paro = dfs(vertex, destino, visitados, camino);
         }
 
-        if (paro)
-            return false;
+        if (!paro)
+            camino.remove(camino.size() - 1);
 
-        camino.remove(camino.size() - 1);
-        return true;
+        return paro;
     }
 
     /**
@@ -116,7 +113,7 @@ public class Mapa {
         CaminoMinimo caminoMinimo = new CaminoMinimo();
 
         if (origen != null && destino != null)
-            dfsMasCorto(origen, destino, new boolean[mapaCiudades.getSize()], new LinkedList<>(), 0, new CaminoMinimo());
+            dfsMasCorto(origen, destino, new boolean[mapaCiudades.getSize()], new LinkedList<>(), 0, caminoMinimo);
 
         return caminoMinimo.getCamino();
     }
@@ -127,7 +124,7 @@ public class Mapa {
 
         if (origen.getData().equals(destino.getData())) {
             if (pesoActual < caminoMinimo.getMinimo()) {
-                caminoMinimo.setCamino(caminoActual);
+                caminoMinimo.setCamino(new LinkedList<>(caminoActual));
                 caminoMinimo.setMinimo(pesoActual);
             }
         } else {
@@ -163,24 +160,24 @@ public class Mapa {
         visitados[origen.getPosition()] = true;
         camino.add(origen.getData());
         if (origen == destino)
-            return false;
+            return true;
 
         List<Edge<String>> adyacentes = mapaCiudades.getEdges(origen);
         Iterator<Edge<String>> iter = adyacentes.iterator();
         boolean paro = false;
         while (iter.hasNext() && !paro) {
-            Vertex<String> vertex = iter.next().getTarget();
-            int weight = iter.next().getWeight();
+            Edge<String> edge = iter.next();
+            Vertex<String> vertex = edge.getTarget();
+            int weight = edge.getWeight();
             int j = vertex.getPosition();
             if (!visitados[j] && tanqueAuto - weight > 0)
                 paro = dfsSinCargaCombustible(vertex, destino, visitados, camino, tanqueAuto - weight);
         }
 
-        if (paro)
-            return false;
+        if (!paro)
+            camino.remove(camino.size() - 1);
 
-        camino.remove(camino.size() - 1);
-        return true;
+        return paro;
     }
 
     public List<String> caminoConMenorCargaDeCombustible(String ciudad1, String ciudad2, int tanqueAuto) {
@@ -210,7 +207,7 @@ public class Mapa {
         if (origen.getData().equals(destino.getData())) {
             if (cargaTanquesActual < caminoMinimo.getMinimo()) {
                 caminoMinimo.setMinimo(cargaTanquesActual);
-                caminoMinimo.setCamino(caminoActual);
+                caminoMinimo.setCamino(new LinkedList<>(caminoActual));
             }
         } else {
             List<Edge<String>> adyacentes = mapaCiudades.getEdges(origen);
