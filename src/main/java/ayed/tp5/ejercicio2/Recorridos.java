@@ -55,7 +55,7 @@ public class Recorridos<T> {
             result.add(vertex.getData());
             for (Edge<T> adjacent : graph.getEdges(vertex)) {
                 int adjacentPos = adjacent.getTarget().getPosition();
-                if (visited[adjacentPos]) {
+                if (!visited[adjacentPos]) {
                     visited[adjacentPos] = true;
                     queue.enqueue(adjacent.getTarget());
                 }

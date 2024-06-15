@@ -81,10 +81,11 @@ public class Mapa {
     }
 
     public boolean dfsExcept(Vertex<String> origen, Vertex<String> destino, boolean[] visitados, List<String> camino, List<String> ciudades) {
-        visitados[origen.getPosition()] = true;
         camino.add(origen.getData());
-        if (origen == destino)
-            return false;
+        visitados[origen.getPosition()] = true;
+
+        if (origen.getData().equals(destino.getData()))
+            return true;
 
         List<Edge<String>> adyacentes = mapaCiudades.getEdges(origen);
         Iterator<Edge<String>> iter = adyacentes.iterator();
